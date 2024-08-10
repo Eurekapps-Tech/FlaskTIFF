@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>TIFF Viewer</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+    }
+
+    .slider-column {
+      width: 30%;
+      padding: 20px;
+      height: max-content;
+    }
+
+
+
+    .slider-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      /* margin-bottom: 10px; */
+    }
+
+    .slider-label {
+      width: 15%;
+      text-align: left;
+      margin-right: 50px;
+      margin-bottom: 10px;
+    }
+
+    .slider {
+      width: 85%;
+    }
+
+    .image-column {
+      width: 100vw;
+      padding: 5vh 5vw;
+      position: relative;
+      height: 100vh;
+      /* overflow: hidden; */
+      /* Hide any overflowing content */
+    }
+
+    #channel_image {
+      max-width: 90vw;
+      max-height: 90vh;
+      height: auto;
+      width: auto;
+      object-fit: contain;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- sidebar code starts here -->
+  <main class="d-flex flex-nowrap">
+    <h1 class="visually-hidden">TIFF Viewer</h1>
+
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 260px">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <svg class="bi pe-none me-2" width="40" height="32">
+          <use xlink:href="#bootstrap" />
+        </svg>
+        <span class="fs-4">Sidebar</span>
+      </a>
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" aria-current="page">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#home" />
+            </svg>
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#speedometer2" />
+            </svg>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#table" />
+            </svg>
+            Orders
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Products
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#people-circle" />
+            </svg>
+            Customers
+          </a>
+        </li>
+      </ul>
+      <hr>
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong>mdo</strong>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+          <li><a class="dropdown-item" href="#">New project...</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="b-example-divider b-example-vr"></div>
+
+    <!-- Side bar code ends here -->
+
+    <div class="container">
+      <div class="slider-column">
+        <label class="slider-label" for="contrast_slider">Contrast</label>
+        <div id="contrast_slider"></div>
+        <br>
+        <div id="contrast_slider_value"></div>
+        <p>Number of channels: {{ num_channels }}</p>
+        <input type="range" min="0" max="{{ num_channels - 1 }}" value="0" id="channel_slider">
+        <br>
+        <label class="slider-label" for="overlay">Activate Overlay</label>
+        <input type="checkbox" id="overlay">
+        <br>
+        <div id="overlay_slider"></div>
+        <br>
+        <div id="overlay_slider_value"></div>
+      </div>
+      <div class="image-column">
+        <img id="channel_image" src="data:image/jpeg;base64,{{ channel_image }}" />
+      </div>
+    </div>
+  </main>
+
+  <!-- <script src="{{ url_for('static', filename='scripts.js') }}"></script> -->
+  <script src="{{ url_for('static', filename='ui.js') }}"></script> <!-- Define UI components first -->
+  <script src="{{ url_for('static', filename='utilities.js') }}"></script>
+  <script src="{{ url_for('static', filename='api.js') }}"></script>
+  <!-- Make sure utilities are defined before this, if used here -->
+
+
+</body>
+
+</html>
